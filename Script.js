@@ -1,3 +1,20 @@
+ // Mobile Menu Toggle
+ document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menuToggle");
+  const navbar = document.querySelector(".navbar");
+
+  if (menuToggle && navbar) {
+    menuToggle.addEventListener("click", () => {
+      navbar.classList.toggle("active");
+    });
+  }
+
+  // Close menu when a link is clicked
+  document.querySelectorAll(".navbar a").forEach(link => {
+    link.addEventListener("click", () => {
+      navbar.classList.remove("active");
+    });
+  });
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("contact-form");
     const statusMsg = document.getElementById("status-message");
