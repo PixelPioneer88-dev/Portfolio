@@ -35,16 +35,33 @@ document.addEventListener("DOMContentLoaded", function () {
   // Contact Form Submission
   // --------------------------
   const form = document.getElementById("contactForm");
+  
+  // Check if form exists before trying to attach event listener
+  if (!form) {
+    console.warn("Contact form not found. Make sure the form has id='contactForm'");
+    return;
+  }
+
+  // Create status message element
   const statusMsg = document.createElement("div");
   statusMsg.id = "status-message";
   statusMsg.style.marginTop = "15px";
   statusMsg.style.fontWeight = "500";
+  statusMsg.style.textAlign = "center";
   form.appendChild(statusMsg);
 
   const submitBtn = form.querySelector("button[type='submit']");
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+
+    // Validate form before submission
+    if (!form.checkValidity()) {
+      statusMsg.innerText = "Please fill in all required fields.";
+      statusMsg.style.color = "#ff4444";
+      form.reportValidity();
+      return;
+    }
 
     const formData = new FormData(form);
     const jsonData = {};
@@ -59,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
     statusMsg.innerText = "Sending...";
     statusMsg.style.color = "#666";
 
-    // Send to Formspree
+    // Send to Formspree - URL fixed (removed extra spaces)
     fetch("https://formspree.io/f/mayvlzra", {
       method: "POST",
       headers: {
@@ -72,15 +89,18 @@ document.addEventListener("DOMContentLoaded", function () {
         if (response.ok) {
           statusMsg.innerText = "Thank you! Your message has been sent.";
           statusMsg.style.color = "#00ff88";
-          form.reset();
+          // Reset form fields
+          Array.from(formData.keys()).forEach(key => {
+            const field = form.querySelector(`[name="${key}"]`);
+            if (field) field.value = '';
+          });
         } else {
-          statusMsg.innerText = "Oops! Something went wrong.";
-          statusMsg.style.color = "#ff4444";
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
       })
       .catch((error) => {
         console.error("Form submission error:", error);
-        statusMsg.innerText = "Network error. Please try again.";
+        statusMsg.innerText = "Oops! Something went wrong. Please try again or contact me directly.";
         statusMsg.style.color = "#ff4444";
       })
       .finally(() => {
