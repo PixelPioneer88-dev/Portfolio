@@ -62,6 +62,16 @@ header {
 .navbar a:hover {
     color: var(--fuchsia-pink);
 }
+/* Mobile Menu Button */
+.menu-btn {
+    display: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+    z-index: 101;
+}
 
 /* Home Section */
 section {
