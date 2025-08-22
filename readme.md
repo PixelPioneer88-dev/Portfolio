@@ -1,4 +1,4 @@
-# InternIntelligence_PersonalPortfolio
+# Apexcify Technologies_PersonalPortfolio
 
 This is my personal frontend developer portfolio created as part of the **InternIntelligence Internship**.
 
