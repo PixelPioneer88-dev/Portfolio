@@ -24,7 +24,7 @@ This is my personal frontend developer portfolio created as part of the **Intern
 
 ## 🧩 Folder Structure
 
-📁 InternIntelligence_PersonalPortfolio
+📁 Apexcify Technologies_PersonalPortfolio
 ├── index.html
 ├── Style.css
 ├── Script.js
